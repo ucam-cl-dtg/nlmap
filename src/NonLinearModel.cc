@@ -39,7 +39,8 @@ NonLinearModel::NonLinearModel(FitFunction *ff,
     mNumParams(ff->GetNumParameters()),
     mLambda(0.001), 
     mChiSq(1000),
-    mLastCall(false)
+    mLastCall(false),
+    mIter(0)
 {
   // Allocate
   mAlpha     = new REAL*[mNumParams];
@@ -109,6 +110,7 @@ void NonLinearModel::Fit(
   if (niter==max_it) throw MaxIterations();
   mLastCall=true;
   SingleMarquardtIteration();
+  mIter = niter;
 }
 
 
