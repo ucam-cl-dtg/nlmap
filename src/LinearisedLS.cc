@@ -122,15 +122,23 @@ XYZData LinearisedLS::GetPosition() {
   }
 
   // Store the hat matrix mH = mA*mult diagonals
-  mH = new REAL[mDim];
-  for (int k=0; k<mDim; k++) {
-    mH[k]=0.0;
-    for (int q=0;q<3; q++) {
-      mH[k] += mult[q][k] * mA[k][q];
-    }
+//    mH = new REAL[mDim];
+//    for (int k=0; k<mDim; k++) {
+//      mH[k]=0.0;
+//      for (int q=0;q<3; q++) {
+//        mH[k] += mult[q][k] * mA[k][q];
+//      }
+//    }
+
+  // What are the residuals?
+  // Y=Ap
+  REAL residualsum=0.0;
+  for (int i=0; i<mDim; i++) {
+    REAL res = mB[i]-(A[0][i]*p[0]+
+      A[1][i]*p[1] +
+      A[1][i]*p[2]);
+    residualsum+=res*res;
   }
-
-
 
   for (int i=0; i<3; i++) {
     delete[] InvATA[i];
@@ -141,5 +149,6 @@ XYZData LinearisedLS::GetPosition() {
   pd.x = p[0];
   pd.y = p[1];
   pd.z = p[2];
+  pd.sigma = sqrt(residualsum/mDim);
   return pd;
 }
