@@ -26,3 +26,21 @@ Requirements
 ------------
 
 NLMAP requires little other than a standards-compliant C++ compiler
+
+
+Compilation
+-----------
+
+It may be neccessary to generate the Makefile(s) using autoconf/automake if they are not present in your distribution:
+
+libtoolize --force
+aclocal
+autoconf
+automake -a
+
+After this, compilation should be as simple as:
+
+./configure --prefix=/usr/local
+make
+make install
+
