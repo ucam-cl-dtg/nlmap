@@ -38,6 +38,7 @@ NonLinearModel::NonLinearModel(FitFunction *ff,
     mDataSize(fd->GetInputDataSize()),
     mNumParams(ff->GetNumParameters()),
     mLambda(0.001), 
+    mChiSq(1000),
     mLastCall(false)
 {
   // Allocate
