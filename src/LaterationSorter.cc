@@ -30,7 +30,6 @@
 // POSITIVE residual
 //----------------------------------------
 int LaterationSorter::GetMaxResidualIndex() {
-  
   LaterationData *mLatData = dynamic_cast<LaterationData *>(mData);
 
   int n = mLatData->GetInputDataSize();
@@ -83,7 +82,7 @@ int LaterationSorter::GetMaxResidualIndex() {
     }
   }
 
-  for (int c=0; c<n; c++) {
+  for (int c=0; c<3; c++) {
     mat[c][0]=res_der[c][0]*mat_inv[0][0] + res_der[c][1]*mat_inv[1][0] + res_der[c][2]*mat_inv[2][0];
     mat[c][1]=res_der[c][0]*mat_inv[0][1] + res_der[c][1]*mat_inv[1][1] + res_der[c][2]*mat_inv[2][1];
     mat[c][2]=res_der[c][0]*mat_inv[0][2] + res_der[c][1]*mat_inv[1][2] + res_der[c][2]*mat_inv[2][2];
