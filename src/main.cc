@@ -86,9 +86,9 @@ int main(int argc, char **argv) {
  
   try {
     XYZData pd = ml.GetPosition(100,0.001,0.03);
-    std::cout << "*** Multilateration" << endl;
+    std::cout << "*** Multilateration" << std::endl;
     std::cout << "Result (should be close to (1,1,0): " <<
-      "(" << pd.x << " " << pd.y << " " << pd.z << ") " << endl;
+      "(" << pd.x << " " << pd.y << " " << pd.z << ") " << std::endl;
     std::cout << "Standard error: " << pd.sigma << " distance units" << std::endl;
   
   }
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
     std::cerr << n.what() << std::endl;
   }
 
-  cout << endl;
+  std::cout << std::endl;
 
   //----------------------------------
   // MULTIANGULATION
@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
 		10.0/180*M_PI,
 		10.0/180*M_PI};
 
-  std::cout << "*** Multiangulation" << endl;
+  std::cout << "*** Multiangulation" << std::endl;
 
   XYData xyd;
   MultiAngulation ma(x2,y2,b,s2,4);
@@ -132,7 +132,7 @@ int main(int argc, char **argv) {
     xyd = ma.GetPosition(100,0.001,40/180*M_PI);
     
     std::cout << "Result (should be close to (0,1): " <<
-      "(" << xyd.x << " " << xyd.y << ") " << endl;
+      "(" << xyd.x << " " << xyd.y << ") " << std::endl;
     std::cout << "Standard error: " << xyd.sigma << " radians" << std::endl;
   }
   catch (ModelingFailure &mf) {

@@ -103,7 +103,7 @@ void NonLinearModel::Fit(
     // Floating point imprecision means we may
     // need these tests to end the algorithm
     // at the right time
-    if ((mChiSq==lastChiSq) && mLambda<=lastLambda)) break;
+    if ((mChiSq==lastChiSq) && (mLambda<=lastLambda)) break;
 
     delta = (lastChiSq==-1.0) ? 1 : fabs((mChiSq-lastChiSq)/lastChiSq);
     niter++;
