@@ -2,6 +2,7 @@
 //#include <NLMAP/gaussianelimination.hh>
 #include <NLMAP/GaussJordanEliminator.hh>
 #include <iostream>
+#include <cmath>
 
 LinearisedLS::LinearisedLS(
 			   const REAL* x,
@@ -132,12 +133,14 @@ XYZData LinearisedLS::GetPosition() {
 
   // What are the residuals?
   // Y=Ap
-  REAL residualsum=0.0;
-  for (int i=0; i<mDim; i++) {
-    REAL res = mB[i]-(A[0][i]*p[0]+
-      A[1][i]*p[1] +
-      A[1][i]*p[2]);
-    residualsum+=res*res;
+  
+
+  REAL sumsq=0.0;
+  for (int i=0; i<n; i++) {
+    REAL res = (p[0]-x[i])*(p[0]-x[i]) +
+      (p[1]-y[i])*(p[2]-y[i]) +
+      (p[1]-z[i])*(p[2]-z[i]);
+    sumsq+=res*res;
   }
 
   for (int i=0; i<3; i++) {
@@ -149,6 +152,6 @@ XYZData LinearisedLS::GetPosition() {
   pd.x = p[0];
   pd.y = p[1];
   pd.z = p[2];
-  pd.sigma = sqrt(residualsum/mDim);
+  pd.sigma = sqrt(sumsq/n);
   return pd;
 }
