@@ -29,7 +29,6 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 				NLMAP/IterativeModeler.hh \
 				NLMAP/MultiAngulation.hh \
 				NLMAP/MultiLateration.hh \
-				NLMAP/Positioner.hh \
 				NLMAP/RANSAC.hh \
 				NLMAP/TriAve.hh
 
