@@ -18,7 +18,8 @@ libNLMAP_la_SOURCES = 	AngulationFunction.cc \
 			MinTriLat.cc \
 			MaxTriLat.cc \
 			LinearisedLS.cc \
-			RobustLS.cc
+			RobustLS.cc \
+			LeastSquares.cc
 
 
 
@@ -38,7 +39,8 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 				NLMAP/MinTriLat.hh \
 				NLMAP/MaxTriLat.hh \
 				NLMAP/LinearisedLS.hh \
-				NLMAP/RobustLS.hh
+				NLMAP/RobustLS.hh \
+				NLMAP/LeastSquares.hh
 
 libNLMAP_la_LDFLAGS = -version-info 0:0:0
 

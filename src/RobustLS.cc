@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-#define CONST 1.5
+#define CONST 1.0
 
 
 RobustLS::RobustLS(
@@ -201,8 +201,8 @@ XYZData RobustLS::GetPosition(const int maxit) {
       mS[i]=sqrt((1.0-mH[i][i])*sumsq/(mDim-3));
     }
 
-    errChange = fabs(sumsq/(mDim-3)-lastErr)/lastErr;
-    lastErr = sumsq/(mDim-3);
+    errChange = fabs(sqrt(sumsq/(mDim-3))-lastErr)/lastErr;
+    lastErr = sqrt(sumsq/(mDim-3));
 
     std::cout << "Iteration: " << iteration << " " << mP[0] << " " << mP[1] 
 	      << " " << mP[2] << " " << lastErr << std::endl;
