@@ -39,11 +39,12 @@ public:
   /// @param a Input A, output inverse of A
   /// @param na Size of square matrix A
   /// @param y Input y, output x  
+  /// @param ny Size of y array
   ///
   static int Eliminate(REAL       **a,    
 		       const int    na,
 		       REAL       **y,
-		       const int    nyc);
+		       const int    ny);
 private:
   GaussJordanEliminator();
 };

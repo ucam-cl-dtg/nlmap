@@ -98,7 +98,7 @@ private:
    * Choose all the permutations by fixing the first choice and then
    * calling Choose2 for each one.
    */
-  void TriAve::Choose1(REAL& sumx, 
+  void Choose1(REAL& sumx, 
 		       REAL& sumy, 
 		       REAL& sumz, 
 		       REAL& sumxsq,
@@ -113,7 +113,7 @@ private:
    * (excluding that chosen for the first choice) and then calling
    * Choose3 for each one.
    */
-  void TriAve::Choose2(int first,
+  void Choose2(int first,
 		       REAL& sumx, 
 		       REAL& sumy, 
 		       REAL& sumz, 
@@ -129,7 +129,7 @@ private:
    * (excluding the first and second selections already made) and then
    * calling Process for each one.
    */
-  void TriAve::Choose3(int first, 
+  void Choose3(int first, 
 		       int second,
 		       REAL& sumx, 
 		       REAL& sumy, 
@@ -145,7 +145,7 @@ private:
   /**
    * Trilaterate the chosen triplet and accumulate the averages.
    */
-  void TriAve::Process(int first, 
+  void Process(int first, 
 		       int second, 
 		       int third,
 		       REAL& sumx, 

@@ -82,8 +82,6 @@ public:
 
   ///
   /// Constructor
-  /// @param nparams Number of parameters (3?)
-  /// @param d Pointer to the lateration data
   ///
   LaterationFunction();
 
@@ -99,7 +97,7 @@ public:
   ///
   /// Evaluate the fitting function
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd);
+  virtual REAL  Evaluate(const int idx, REAL *parameters, FitData *fd);
 
 };
 

@@ -32,6 +32,34 @@
 //----------------------------------
 int main(int argc, char **argv) {
 
+  cout << "BAT: 996.949 1041.04 0.704703" << endl;
+ 
+
+
+
+	REAL x[9] = {998.379822,998.379700,997.556274,997.107727,997.105835,996.378906,995.789734,994.583435,995.186523};
+  REAL y[9] = {1042.117554,1040.692261,1041.737427,1040.835205,1042.340332,1041.953247,1041.354980,1040.754395,1042.480225};
+  REAL z[9] = {2.282333,2.278333,2.282333,2.278333,2.286333,2.467333,2.463667,2.470667,2.465667};
+  REAL d[9] = {2.391647,2.146659,1.823898,1.600946,2.039072,2.070182,2.122031,3.521961,2.879030};
+  REAL s[9] = {1.0, 1.0, 1.0, 1.0, 1.0,1.0,1.0,1.0,1.0};
+
+
+
+
+ MultiLateration ml(x,y,z,d,s,9);
+ try {
+   XYZData pd = ml.GetPosition(100,0.001,0.03);
+ }
+ catch (ModelingFailure &mf) {
+   std::cerr << mf.what() << std::endl;
+   std::cout << "Best attempt: " << "( " << ml.GetLaterationFunction()->GetParams()[0]
+	      << ", " <<ml.GetLaterationFunction()->GetParams()[1] << "," <<
+      ml.GetLaterationFunction()->GetParams()[2] << ")" << std::endl;
+    std::cout << "With error: " << ml.GetLaterationFunction()->GetError() << std::endl;
+ }
+ return 0;
+
+
 
   //----------------------------------
   // MULTILATERATION
@@ -42,13 +70,13 @@ int main(int argc, char **argv) {
   //----------------------------------
 
   // Set up for somewhere near (1,1,0)
-  REAL x[5] = {0.0, 2.0, 0.0, 1.0, 0.0};
-  REAL y[5] = {0.0, 0.0, 2.0, 1.0, 0.0};
-  REAL z[5] = {1.0, 1.0, 1.0, 2.0, 1.0};
-  REAL d[5] = {1.7, sqrt(3.0), sqrt(3.0), 2.1, sqrt(3.0)};
-  REAL s[5] = {1.0, 1.0, 1.0, 1.0, 10.0};
+ //   REAL x[5] = {0.0, 2.0, 0.0, 1.0, 0.0};
+//    REAL y[5] = {0.0, 0.0, 2.0, 1.0, 0.0};
+//    REAL z[5] = {1.0, 1.0, 1.0, 2.0, 1.0};
+//    REAL d[5] = {1.7, sqrt(3.0), sqrt(3.0), 2.1, sqrt(3.0)};
+//    REAL s[5] = {1.0, 1.0, 1.0, 1.0, 10.0};
 
-  MultiLateration ml(x,y,z,d,s,5);
+ // MultiLateration ml(x,y,z,d,s,5);
  
   try {
     XYZData pd = ml.GetPosition(100,0.001,0.03);

@@ -47,7 +47,8 @@ class FitData {
   virtual int   GetInputDataSize();
 
   ///
-  /// Get measurement for VALID index idx
+  /// Get the idxth index that is valid
+  /// @param idx The idxth valid index to get
   ///
   virtual REAL  GetMeasurement(const int idx);
 
@@ -78,7 +79,7 @@ class FitData {
 
   ///
   /// Add some new data
-  /// @param Datum A vector of data (e.g. x,y,z)
+  /// @param data A vector of data (e.g. x,y,z)
   /// @param measurement The measured value for the datum
   /// @param error The estimated error in measurement parameter
   ///
@@ -115,7 +116,7 @@ class FitFunction {
   ///
   /// Constructor
   /// @param nparams Number of parameters to solve for
-  /// @param fd Pointer to the data to fit to
+  ///
   FitFunction(const int nparams);
   virtual ~FitFunction();
 
@@ -123,6 +124,8 @@ class FitFunction {
   /// Return the residual between two values
   /// Default is just val1-val2 but this can be
   /// overridden in derived classes if needed
+  /// @param val1 First value
+  /// @param val2 Second value
   ///
   virtual REAL CalculateResidual(REAL val1, REAL val2);
 
@@ -157,8 +160,9 @@ class FitFunction {
   /// parameters
   /// @param idx idx'th valid datum
   /// @param parameters Array of current parameter values
+  /// @param fd the fitting data
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd)=0;
+  virtual REAL  Evaluate(const int idx, REAL *parameters, FitData *fd)=0;
 
   ///
   /// Get the overall standard error of the model parameters

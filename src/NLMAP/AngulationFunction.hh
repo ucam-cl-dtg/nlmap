@@ -94,8 +94,9 @@ public:
   /// @param idx Index of the datum
   /// @param parameters Array of parameter
   /// values to evaluate against
+  /// @param fd Pointer to the data to fit to
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd);
+  virtual REAL  Evaluate(const int idx, REAL *parameters, FitData *fd);
   
   ///
   /// Special residual calc needed

@@ -92,7 +92,7 @@ REAL FitData::GetData(const int f, const int idx) {
 //----------------------------------------
 // Add a single datum to the store
 //----------------------------------------
-void FitData::FitData::AddDatum (Datum &data,
+void FitData::AddDatum (Datum &data,
 				 REAL measurement,
 				 REAL error)
 {
