@@ -255,7 +255,7 @@
      <UML:Parameter stereotype="" package="" xmi.id="245" value="" type="FitData *" abstract="0" documentation="" name="fd" static="0" scope="200" />    </UML:Operation>
     <UML:Operation stereotype="" package="" xmi.id="246" type="virtual " abstract="0" documentation="" name="~LaterationSorter" static="0" scope="200" />   </UML:Class>  </umlobjects>
   <diagrams>
-<diagram snapgrid="0" showattsig="0" fillcolor="#ffffc0" showgrid="1" showopsig="0" usefillcolor="1" snapx="10" snapy="10" showatts="0" xmi.id="1" documentation="" type="402" showops="1" showpackage="0" name="class diagram" localid="30000" showstereotype="0" showscope="1" font="helvetica,-1,12,0,50,0,0,0,0,0" linecolor="#ff0000" >
+<diagram snapgrid="0" showattsig="0" fillcolor="#ffffc0" showgrid="0" showopsig="0" usefillcolor="1" snapx="10" snapy="10" showatts="0" xmi.id="1" documentation="" type="402" showops="1" showpackage="0" name="class diagram" localid="30000" showstereotype="0" showscope="1" font="helvetica,-1,12,0,50,0,0,0,0,0" linecolor="#ff0000" >
 <widgets>
 <UML:ConceptWidget usesdiagramfillcolour="0" width="160" showattsigs="600" usesdiagramusefillcolour="0" x="680" linecolour="#ff0000" y="250" showopsigs="600" usesdiagramlinecolour="0" fillcolour="#ffffc0" height="176" usefillcolor="1" showattributes="0" xmi.id="92" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />
      <UML:ConceptWidget usesdiagramfillcolour="0" width="138" showattsigs="600" usesdiagramusefillcolour="0" x="250" linecolour="#ff0000" y="260" showopsigs="600" usesdiagramlinecolour="0" fillcolour="#ffffc0" height="176" usefillcolor="1" showattributes="0" xmi.id="116" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />
@@ -272,7 +272,7 @@
      <UML:ConceptWidget usesdiagramfillcolour="1" width="180" showattsigs="600" usesdiagramusefillcolour="1" x="440" linecolour="none" y="460" showopsigs="600" usesdiagramlinecolour="1" fillcolour="none" height="112" usefillcolor="1" showattributes="0" xmi.id="63" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />
      <UML:ConceptWidget usesdiagramfillcolour="0" width="164" showattsigs="600" usesdiagramusefillcolour="0" x="751" linecolour="#ff0000" y="647" showopsigs="600" usesdiagramlinecolour="0" fillcolour="#a6e2a2" height="64" usefillcolor="1" showattributes="0" xmi.id="231" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />
      <UML:ConceptWidget usesdiagramfillcolour="0" width="104" showattsigs="600" usesdiagramusefillcolour="1" x="279" linecolour="none" y="685" showopsigs="600" usesdiagramlinecolour="1" fillcolour="#b3c1ff" height="64" usefillcolor="1" showattributes="0" xmi.id="157" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />
-     <UML:ConceptWidget usesdiagramfillcolour="0" width="104" showattsigs="600" usesdiagramusefillcolour="1" x="110" linecolour="none" y="688" showopsigs="600" usesdiagramlinecolour="1" fillcolour="#ff9696" height="64" usefillcolor="1" showattributes="0" xmi.id="139" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />    </widgets>
+     <UML:ConceptWidget usesdiagramfillcolour="0" width="104" showattsigs="600" usesdiagramusefillcolour="1" x="110" linecolour="none" y="686" showopsigs="600" usesdiagramlinecolour="1" fillcolour="#ff9696" height="64" usefillcolor="1" showattributes="0" xmi.id="139" showoperations="1" showpackage="0" showscope="1" showstereotype="0" font="helvetica,-1,12,0,50,0,0,0,0,0" />    </widgets>
     <messages/>
     <associations>
 <UML:AssocWidget totalcounta="2" indexa="1" totalcountb="3" indexb="2" widgetbid="116" widgetaid="21" documentation="" type="500" >
@@ -378,11 +378,11 @@
        <point x="331" y="650" />
        <point x="331" y="516" />      </linepath>     </UML:AssocWidget>
      <UML:AssocWidget totalcounta="2" indexa="1" totalcountb="4" indexb="3" widgetbid="63" widgetaid="139" documentation="" type="512" >
-<UML:FloatingTextWidget usesdiagramfillcolour="1" width="0" usesdiagramusefillcolour="1" x="152" linecolour="none" y="666" operation="" usesdiagramlinecolour="1" role="701" fillcolour="none" height="0" usefillcolor="1" seqnum="" xmi.id="-1" text="" font="helvetica,-1,12,0,50,0,0,0,0,0" />
+<UML:FloatingTextWidget usesdiagramfillcolour="1" width="0" usesdiagramusefillcolour="1" x="152" linecolour="none" y="664" operation="" usesdiagramlinecolour="1" role="701" fillcolour="none" height="0" usefillcolor="1" seqnum="" xmi.id="-1" text="" font="helvetica,-1,12,0,50,0,0,0,0,0" />
       <UML:FloatingTextWidget usesdiagramfillcolour="1" width="0" usesdiagramusefillcolour="1" x="425" linecolour="none" y="546" operation="" usesdiagramlinecolour="1" role="702" fillcolour="none" height="0" usefillcolor="1" seqnum="" xmi.id="-1" text="*" font="helvetica,-1,12,0,50,0,0,0,0,0" />
-      <UML:FloatingTextWidget usesdiagramfillcolour="1" width="0" usesdiagramusefillcolour="1" x="162" linecolour="none" y="616" operation="" usesdiagramlinecolour="1" role="703" fillcolour="none" height="0" usefillcolor="1" seqnum="" xmi.id="-1" text="" font="helvetica,-1,12,0,50,0,0,0,0,0" />
+      <UML:FloatingTextWidget usesdiagramfillcolour="1" width="0" usesdiagramusefillcolour="1" x="162" linecolour="none" y="615" operation="" usesdiagramlinecolour="1" role="703" fillcolour="none" height="0" usefillcolor="1" seqnum="" xmi.id="-1" text="" font="helvetica,-1,12,0,50,0,0,0,0,0" />
       <linepath>
-<startpoint startx="162" starty="688" />
+<startpoint startx="162" starty="686" />
        <endpoint endx="440" endy="544" />
        <point x="162" y="544" />
        <point x="393" y="544" />      </linepath>     </UML:AssocWidget>    </associations>   </diagram>  </diagrams>
