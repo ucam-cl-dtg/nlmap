@@ -24,8 +24,8 @@
 #include <cmath>
 
 
-LaterationFunction::LaterationFunction(const int nparams, LaterationData *d)
-  : FitFunction(nparams,d) {}
+LaterationFunction::LaterationFunction()
+  : FitFunction(3) {}
 
 LaterationFunction::~LaterationFunction() {}
 
@@ -34,9 +34,9 @@ LaterationFunction::~LaterationFunction() {}
 // Initialise the parameters ready for 
 // regression
 //----------------------------------------
-void LaterationFunction::InitialiseParameters()
+void LaterationFunction::InitialiseParameters(FitData *fd)
 {
-  LaterationData *data = dynamic_cast<LaterationData *>(mData);
+  LaterationData *data = dynamic_cast<LaterationData *>(fd);
   // Guess at the average position
   for (int i=0; i<3; i++) mParams[i]=0.0;
   REAL z_min = data->GetZ(0);
@@ -50,20 +50,16 @@ void LaterationFunction::InitialiseParameters()
   mParams[0] /= data->GetInputDataSize();
   mParams[1] /= data->GetInputDataSize();
   mParams[2]  = z_min-d_min;
-  
-  mParams[0] = 2.0/3.0+0.5;
-  mParams[1] = 4.0/3.0-0.5;
-  mParams[2]  = 1.0/3.0+0.5;
 }
 
 
 //----------------------------------------
 // Evaluate the current fit function
 //----------------------------------------
-REAL LaterationFunction::Evaluate(const int i, REAL *parameters) 
+REAL LaterationFunction::Evaluate(const int i, REAL *parameters, FitData *fd) 
 {
   
-  LaterationData *data = dynamic_cast<LaterationData *>(mData);
+  LaterationData *data = dynamic_cast<LaterationData *>(fd);
   REAL d = sqrt(
 		(data->GetX(i)-parameters[0])*(data->GetX(i)-parameters[0]) +
 		(data->GetY(i)-parameters[1])*(data->GetY(i)-parameters[1]) +

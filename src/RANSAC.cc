@@ -144,8 +144,8 @@ XYZData RANSAC::GetPosition(const int max_it,
       d.push_back(m_z[index]);
       latdata.AddDatum(d,m_d[index],m_sigma[index]);
     }
-    LaterationFunction ff(3,&latdata);
-    ff.InitialiseParameters();
+    LaterationFunction ff;
+    ff.InitialiseParameters(&latdata);
     NonLinearModel nlm(&ff,&latdata);
     nlm.Fit(max_it, convergence); 
          

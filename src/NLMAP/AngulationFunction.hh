@@ -76,7 +76,7 @@ public:
   ///
   /// Constructor
   ///
-  AngulationFunction(const int nparams, AngulationData *d);
+  AngulationFunction();
   
   ///
   /// Destructor
@@ -86,7 +86,7 @@ public:
   ///
   /// Initialise the parameters
   ///
-  virtual void  InitialiseParameters();
+  virtual void  InitialiseParameters(FitData *fd);
   
   ///
   /// Evaluate the fitting function
@@ -95,7 +95,7 @@ public:
   /// @param parameters Array of parameter
   /// values to evaluate against
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[]);
+  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd);
   
   ///
   /// Special residual calc needed

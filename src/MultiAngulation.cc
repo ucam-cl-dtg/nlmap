@@ -37,7 +37,7 @@ MultiAngulation::MultiAngulation(REAL *x,
     datum.push_back(y[i]);
     mAngData.AddDatum(datum,d[i],sigma[i]);
   }
-  mAngFunc = new AngulationFunction(2,&mAngData);
+  mAngFunc = new AngulationFunction();
   mAngSort = new MagnitudeSorter(mAngFunc, &mAngData);
 }
 

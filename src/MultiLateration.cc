@@ -39,7 +39,7 @@ MultiLateration::MultiLateration(REAL *x,
     datum.push_back(z[i]);
     mLatData.AddDatum(datum,d[i],sigma[i]);
   }
-  mLatFunc = new LaterationFunction(3,&mLatData);
+  mLatFunc = new LaterationFunction();
   mLatSort = new LaterationSorter(mLatFunc, &mLatData);
 }
 

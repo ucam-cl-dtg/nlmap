@@ -23,6 +23,7 @@
  */
 
 #include <NLMAP/TriAve.hh>
+#include <cmath>
 
 TriAve::TriAve(const REAL* x,
 	       const REAL* y,
@@ -170,8 +171,8 @@ void TriAve::Process(int first,
   d3.push_back(m_z[first]);
   latdata.AddDatum(d3,m_d[first],m_sigma[first]);
 
-  LaterationFunction ff(3,&latdata);
-  ff.InitialiseParameters();
+  LaterationFunction ff;
+  ff.InitialiseParameters(&latdata);
   NonLinearModel nlm(&ff,&latdata);
   nlm.Fit(max_it, convergence); 
   REAL nlm_x = ff.GetParams()[0];

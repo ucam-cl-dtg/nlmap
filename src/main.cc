@@ -52,8 +52,8 @@ int main(int argc, char **argv) {
   data.AddDatum(datum,1.83012,0.1);
 
 
-  LaterationFunction lf(3,&data);
-  lf.InitialiseParameters();
+  LaterationFunction lf;
+  lf.InitialiseParameters(&data);
   NonLinearModel nlm(&lf,&data);
   try{
     nlm.Fit(100, 0.001); 

@@ -116,7 +116,7 @@ class FitFunction {
   /// Constructor
   /// @param nparams Number of parameters to solve for
   /// @param fd Pointer to the data to fit to
-  FitFunction(const int nparams, FitData *fd);
+  FitFunction(const int nparams);
   virtual ~FitFunction();
 
   ///
@@ -134,7 +134,7 @@ class FitFunction {
   ///
   /// Initialise the parameters
   ///
-  virtual void  InitialiseParameters()=0;
+  virtual void  InitialiseParameters(FitData *fd)=0;
 
   ///
   /// Return the parameter estimates
@@ -158,7 +158,7 @@ class FitFunction {
   /// @param idx idx'th valid datum
   /// @param parameters Array of current parameter values
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[])=0;
+  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd)=0;
 
   ///
   /// Get the overall standard error of the model parameters
@@ -176,7 +176,6 @@ protected:
   REAL     mError;
   REAL    *mParams;
   REAL    *mDeriv;
-  FitData *mData;
 };
 
 

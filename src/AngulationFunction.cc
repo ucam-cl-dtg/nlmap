@@ -39,8 +39,8 @@ REAL AngulationData::GetY(const int i)
 }
 
 
-AngulationFunction::AngulationFunction(const int nparams, AngulationData *d)
-  :  FitFunction(nparams,d) {};
+AngulationFunction::AngulationFunction()
+  :  FitFunction(2) {};
 
 
 AngulationFunction::~AngulationFunction() {}
@@ -50,10 +50,10 @@ AngulationFunction::~AngulationFunction() {}
 // Initialise the parameters ready for 
 // regression
 //----------------------------------------
-void AngulationFunction::InitialiseParameters()
+void AngulationFunction::InitialiseParameters(FitData *fd)
 {
 
-  AngulationData *data = dynamic_cast<AngulationData *>(mData);
+  AngulationData *data = dynamic_cast<AngulationData *>(fd);
 
   // Use the first two measurements to get a start position
   REAL diff1y = cos(data->GetMeasurement(0));
@@ -73,9 +73,9 @@ void AngulationFunction::InitialiseParameters()
 
 
 
-REAL AngulationFunction::Evaluate(const int i, REAL *parameters) 
+REAL AngulationFunction::Evaluate(const int i, REAL *parameters, FitData *fd) 
 {
-  AngulationData *data = dynamic_cast<AngulationData *>(mData);
+  AngulationData *data = dynamic_cast<AngulationData *>(fd);
 
   // First calculate the bearing of the estimate
   // Cross product of (0,1,0) with (px-rix,py-riy,0)

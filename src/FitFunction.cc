@@ -23,8 +23,8 @@
 #include <NLMAP/NLMAPExceptions.hh>
 
 
-FitFunction::FitFunction(const int nparams, FitData *fd) 
-  : mNumParams(nparams), mData(fd)
+FitFunction::FitFunction(const int nparams) 
+  : mNumParams(nparams)
 {
   mParams = new REAL[mNumParams];
   mDeriv = new REAL[mNumParams];

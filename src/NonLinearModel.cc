@@ -205,7 +205,7 @@ void NonLinearModel::ComputeSupportData(REAL *params) {
 
   for (int i=0;i<mDataSize; i++) {
     // Compute the current function value
-    REAL result = mFitFunction->Evaluate(i,params);
+    REAL result = mFitFunction->Evaluate(i,params,mFitData);
     REAL dm = mFitData->GetMeasurement(i)-result;
     REAL sigma = mFitData->GetSigma(i);
     mChiSq += dm*dm/(sigma*sigma);

@@ -35,11 +35,14 @@ int MagnitudeSorter::GetMaxResidualIndex() {
   REAL maxres=0.0;
   // Calculate the residuals
   for (int i=0; i<n; i++) {
-    REAL b  = mFunc->Evaluate(i,mFunc->GetParams());
+    REAL b  = mFunc->Evaluate(i,mFunc->GetParams(),mData);
     REAL b2 = mData->GetMeasurement(i);
 
     REAL res = mFunc->CalculateResidual(
-					   mFunc->Evaluate(i,mFunc->GetParams()), 
+					   mFunc->Evaluate(i,
+							   mFunc->GetParams(),
+							   mData
+							   ), 
 					   mData->GetMeasurement(i)
 					   );
     // Want to know the magnitude of the residual only

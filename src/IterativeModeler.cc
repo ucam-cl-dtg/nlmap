@@ -37,7 +37,7 @@ void IterativeModeler::Model(FitFunction *ff,
 			     const REAL min_delta,
 			     const REAL convergence)
 {
-  ff->InitialiseParameters();
+  ff->InitialiseParameters(fd);
 
   if (fd->GetInputDataSize() <= ff->GetNumParameters()) {
     // Not enough constraints
@@ -47,7 +47,7 @@ void IterativeModeler::Model(FitFunction *ff,
   bool success=false;
   while (fd->GetInputDataSize()>ff->GetNumParameters()) {
     // Try to fit a model to the current parameters
-    ff->InitialiseParameters();
+    ff->InitialiseParameters(fd);
     NonLinearModel nlm(ff,fd);
     try {
       nlm.Fit(max_it, min_delta); 

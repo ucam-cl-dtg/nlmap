@@ -85,7 +85,7 @@ public:
   /// @param nparams Number of parameters (3?)
   /// @param d Pointer to the lateration data
   ///
-  LaterationFunction(const int nparams, LaterationData *d);
+  LaterationFunction();
 
   virtual ~LaterationFunction();
 
@@ -94,12 +94,12 @@ public:
   /// averaging the input locations
   /// to make an initial seed guess
   ///
-  virtual void  InitialiseParameters();
+  virtual void  InitialiseParameters(FitData *fd);
 
   ///
   /// Evaluate the fitting function
   ///
-  virtual REAL  Evaluate(const int idx, REAL parameters[]);
+  virtual REAL  Evaluate(const int idx, REAL parameters[], FitData *fd);
 
 };
 
