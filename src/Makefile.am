@@ -12,7 +12,9 @@ libNLMAP_la_SOURCES = 	AngulationFunction.cc \
 			MultiAngulation.cc \
 			MultiLateration.cc \
 			FitFunction.cc \
-			FitData.cc
+			FitData.cc \
+			RANSAC.cc \
+			TriAve.cc
 
 
 
@@ -27,11 +29,18 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 				NLMAP/IterativeModeler.hh \
 				NLMAP/MultiAngulation.hh \
 				NLMAP/MultiLateration.hh \
-				NLMAP/Positioner.hh
+				NLMAP/Positioner.hh \
+				NLMAP/RANSAC.hh \
+				NLMAP/TriAve.hh
 
 libNLMAP_la_LDFLAGS = -version-info 0:0:0
 
-bin_PROGRAMS = example
+bin_PROGRAMS = example ransac_test
+
 example_SOURCES = main.cc
 example_LDADD = libNLMAP.la
-noinst_PROGRAMS = example
+
+ransac_test_SOURCES = ransac_test.cc
+ransac_test_LDADD = libNLMAP.la
+
+noinst_PROGRAMS = example ransac_test
