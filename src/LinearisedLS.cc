@@ -133,14 +133,12 @@ XYZData LinearisedLS::GetPosition() {
 
   // What are the residuals?
   // Y=Ap
-  
-
-  REAL sumsq=0.0;
-  for (int i=0; i<n; i++) {
-    REAL res = (p[0]-x[i])*(p[0]-x[i]) +
-      (p[1]-y[i])*(p[2]-y[i]) +
-      (p[1]-z[i])*(p[2]-z[i]);
-    sumsq+=res*res;
+  REAL residualsum=0.0;
+  for (int i=0; i<mDim; i++) {
+    REAL res = mB[i]-(mA[0][i]*p[0]+
+      mA[1][i]*p[1] +
+      mA[1][i]*p[2]);
+    residualsum+=res*res;
   }
 
   for (int i=0; i<3; i++) {
@@ -152,6 +150,6 @@ XYZData LinearisedLS::GetPosition() {
   pd.x = p[0];
   pd.y = p[1];
   pd.z = p[2];
-  pd.sigma = sqrt(sumsq/n);
+  pd.sigma = sqrt(residualsum/mDim);
   return pd;
 }
