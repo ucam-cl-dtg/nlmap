@@ -103,6 +103,6 @@ REAL AngulationFunction::CalculateResidual(REAL b, REAL b2)
   if (b>b2) res2=(b+2.0*M_PI)-b2;
   else res2=b-(b2+2.0*M_PI);
   
-  REAL res = abs(res1)<=abs(res2)?abs(res1):abs(res2);
+  REAL res = fabs(res1)<=fabs(res2)?fabs(res1):fabs(res2);
   return res;
 }
