@@ -1,6 +1,5 @@
 /*
-  $Header$
-  Copyright (C) 2004 Robert K. Harle
+  Copyright (C) 2004 Andrew C. Rice
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -16,26 +15,29 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-  Email: robert.harle@achilles.org
-  Email: rkh23@cantab.net
+  Email: acr31@cam.ac.uk
 */
 
-#ifndef PARAMETERS_HH
-#define PARAMETERS_HH
+/**
+ * $Header$
+ */
 
-// Do you want debug info?
-//#define DEBUG_FLAG
+#ifndef MAXTRILAT_GUARD
+#define MAXTRILAT_GUARD
 
-#ifdef DEBUG_FLAG
-# include <iostream>
-# define DEBUG(x) std::cout << __FILE__ << ":" << __LINE__ << " " << x << std::endl
-#else
-# define DEBUG(x)
-#endif
+#include <NLMAP/MinTriLat.hh>
 
+class MaxTriLat : public MinTriLat {
+protected:
+  virtual void MakeSelection(int ids[3]) const;
 
-// What precision do you want?
-#define REAL float
+public:
+  MaxTriLat(const REAL* x,
+	    const REAL* y,
+	    const REAL* z,
+	    const REAL* d,
+	    const REAL* sigma,
+	    const int n);
+};
 
-
-#endif
+#endif//MAXTRILAT_GUARD

@@ -14,7 +14,9 @@ libNLMAP_la_SOURCES = 	AngulationFunction.cc \
 			FitFunction.cc \
 			FitData.cc \
 			RANSAC.cc \
-			TriAve.cc
+			TriAve.cc \
+			MinTriLat.cc \
+			MaxTriLat.cc
 
 
 
@@ -30,7 +32,9 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 				NLMAP/MultiAngulation.hh \
 				NLMAP/MultiLateration.hh \
 				NLMAP/RANSAC.hh \
-				NLMAP/TriAve.hh
+				NLMAP/TriAve.hh \
+				NLMAP/MinTriLat.hh \
+				NLMAP/MaxTriLat.hh
 
 libNLMAP_la_LDFLAGS = -version-info 0:0:0
 
