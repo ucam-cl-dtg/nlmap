@@ -2,6 +2,7 @@
 #include <cmath>
 #include <NLMAP/MultiLateration.hh>
 
+#include <iostream>
 int main(int argc, char **argv) {
  // Set up for somewhere near (1,1,0)
   REAL x[5] = {0.0, 2.0, 0.0, 1.0, 0.0};
@@ -15,7 +16,7 @@ int main(int argc, char **argv) {
 
   XYZData pd = ls.GetPosition();
   
-  std::cout << pd.x << " " << pd.y << " " << pd.z << endl;
+  std::cout << pd.x << " " << pd.y << " " << pd.z << std::endl;
 
   MultiLateration ml(x,y,z,d,s,5);
  try {

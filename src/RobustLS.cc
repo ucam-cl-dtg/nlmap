@@ -204,8 +204,8 @@ XYZData RobustLS::GetPosition(const int maxit) {
     errChange = fabs(sumsq/(mDim-3)-lastErr)/lastErr;
     lastErr = sumsq/(mDim-3);
 
-    cout << "Iteration: " << iteration << " " << mP[0] << " " << mP[1] 
-	 << " " << mP[2] << " " << lastErr << endl;
+    std::cout << "Iteration: " << iteration << " " << mP[0] << " " << mP[1] 
+	      << " " << mP[2] << " " << lastErr << std::endl;
 
     iteration++;
   }
