@@ -69,6 +69,15 @@ public:
 };
 
 ///
+/// NAN from FitFunction
+///
+class NANException : public NLMAPException {
+public:
+  char * what() { return "Evaluate() call resulted in NAN in derivates or values"; }
+};
+
+
+///
 /// Encountered an array out-of-bounds index
 ///
 class IndexOutOfBounds : public NLMAPException {
@@ -114,6 +123,8 @@ class InvalidData : public NLMAPException {
 public:
   char * what() { return "Attempt to add invalid data"; }
 };
+
+
 
 
 #endif
