@@ -1,0 +1,53 @@
+/*
+  Copyright (C) 2004 Robert K. Harle
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+  Email: robert.harle@achilles.org
+  Email: rkh23@cantab.net
+*/
+
+#ifndef GAUSS_JORDAN_ELIMINATOR_HH
+#define GAUSS_JORDAN_ELIMINATOR_HH
+
+#include <NLMAP/Parameters.hh>
+
+/*
+ * GaussJordanEliminator
+ * This class implements a standard
+ * Gauss-Jordan elimination to solve
+ * a set of linear equations y=Ax
+ */
+class GaussJordanEliminator {
+public:
+
+  /*
+   * Static eliminate method
+   * a = input A, output inverse A
+   * na = size of square matrix A
+   * y = input y, output x  
+   */
+  static int Eliminate(REAL       **a,    
+		       const int    na,
+		       REAL       **y,
+		       const int    nyc);
+private:
+  // Don't want to be able 
+  // to construct an object yet!
+  GaussJordanEliminator();
+};
+
+
+#endif

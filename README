@@ -1,0 +1,28 @@
+Non-Linear Modelling And Positioning (NLMAP) Library
+====================================================
+
+
+What is NLMAP?
+--------------
+
+The files distributed with this README constitute the NLMAP
+library. This is a small C++ library that can non-linearly model any
+data using the Levenberg-Marquardt method i.e. fit a non-linear
+function to a data series and estimate the fit. In particular it
+provides functions to use the technique to position objects using
+multilateration or multiangulation.
+
+History of NLMAP 
+---------------- 
+
+I wrote NLMAP following the realisation that very few people seem
+able to write robust multilateration algorithms that gave the best
+results from their data. Having worked with a high accuracy
+positioning system during my PhD I decided to write an algorithm from
+scratch, free of intellectual property issues and make it generally
+available.
+
+Requirements
+------------
+
+NLMAP requires little other than a standards-compliant C++ compiler

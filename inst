@@ -1,0 +1,6 @@
+aclocal
+automake
+autoconf
+make
+make dist
+
