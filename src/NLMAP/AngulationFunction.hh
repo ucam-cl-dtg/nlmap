@@ -28,25 +28,81 @@
 #include <vector>
 
 
+///
+/// A specific data store for 2D 
+/// positioning by angulation
+///
 class AngulationData : public FitData 
 {
 public:
+
+  ///
+  /// Constructor
+  ///
   AngulationData();
+
+  ///
+  /// Destructor
+  ///
   virtual ~AngulationData();
+
+  ///
+  /// Get the X co-ordinate of base
+  /// station
+  /// @param i The station index
+  ///
   REAL GetX(const int i);
+
+  ///
+  /// Get the Y co-ordinate of base
+  /// station
+  /// @param i The station index
+  ///
   REAL GetY(const int i);
 };
 
+
+
+///
+/// Specification of the parameters
+/// and the fit function for 2D
+/// positioning by angulation
+///
 class AngulationFunction : public FitFunction
 {
 public:
+
+  ///
+  /// Constructor
+  ///
   AngulationFunction(const int nparams, AngulationData *d);
+  
+  ///
+  /// Destructor
+  ///
   virtual ~AngulationFunction();
-  // Initialise the parameters
+
+  ///
+  /// Initialise the parameters
+  ///
   virtual void  InitialiseParameters();
-  // Evaluate the fitting function
+  
+  ///
+  /// Evaluate the fitting function
+  /// for a given datum
+  /// @param idx Index of the datum
+  /// @param parameters Array of parameter
+  /// values to evaluate against
+  ///
   virtual REAL  Evaluate(const int idx, REAL parameters[]);
-  // Special residual calc
+  
+  ///
+  /// Special residual calc needed
+  /// to account for modulo-2pi nature
+  /// of bearings.
+  /// @param b First bearing
+  /// @param b2 Second bearing
+  ///
   virtual REAL CalculateResidual(REAL b, REAL b2);
 };
 
@@ -54,46 +110,3 @@ public:
 
 
 
-
-
-//  class AngulationFunction : public FitFunction {
-//  public:
-//    AngulationFunction();
-//    virtual ~AngulationFunction();
-
-//    int   GetInputDataSize();
-//    int   GetNumParameters() { return 2;}
-//    REAL* GetParams() { return mParams; }
-//    REAL  GetCurrentDerivative(const int idx) { return mDeriv[idx]; }
-//    REAL  GetMeasurement(const int idx) { return mBearing[ActualIndex(idx)];} 
-//    REAL  GetSigma(const int idx) { return mSigma[ActualIndex(idx)]; }
-//    bool  GetValidity(const int idx) { return mValidity[ActualIndex(idx)]; }
-//    REAL  Evaluate(const int idx, REAL *parameters);
-//    REAL  GetError() { return mStdErr; }
-//    void  SetError(const REAL err) { mStdErr=err; }
-//    REAL  CalculateResidual(REAL a, REAL b);
-
-//    REAL  GetX(const int i) { return mRx[ActualIndex(i)]; }
-//    REAL  GetY(const int i) { return mRy[ActualIndex(i)]; }
-
-//    void  Invalidate(const int i) {mValidity[ActualIndex(i)]=false;}
-//    void  InitialiseParameters();
-//    void  AddDatum(REAL x, REAL y,
-//  		 REAL bearing,
-//  		 REAL sigma);
-
-//  private:
-//    int ActualIndex(const int i);
-
-//    std::vector<REAL>    mRx;
-//    std::vector<REAL>    mRy;
-//    std::vector<REAL>    mSigma;
-//    std::vector<REAL>    mBearing;
-//    bool                *mValidity;
-//    REAL                 mParams[2];
-//    REAL                 mDeriv[2];
-//    bool                 mInit;
-//    REAL                 mStdErr;
-//  };
-
-#endif

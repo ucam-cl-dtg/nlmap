@@ -24,28 +24,26 @@
 
 #include <NLMAP/Parameters.hh>
 
-/*
- * GaussJordanEliminator
- * This class implements a standard
- * Gauss-Jordan elimination to solve
- * a set of linear equations y=Ax
- */
+///
+/// This class implements a standard
+/// Gauss-Jordan elimination to solve
+/// a set of linear equations y=Ax
+///
 class GaussJordanEliminator {
 public:
 
-  /*
-   * Static eliminate method
-   * a = input A, output inverse A
-   * na = size of square matrix A
-   * y = input y, output x  
-   */
+  ///
+  /// Static eliminate method to solve
+  /// y=Ax
+  /// @param a Input A, output inverse of A
+  /// @param na Size of square matrix A
+  /// @param y Input y, output x  
+  ///
   static int Eliminate(REAL       **a,    
 		       const int    na,
 		       REAL       **y,
 		       const int    nyc);
 private:
-  // Don't want to be able 
-  // to construct an object yet!
   GaussJordanEliminator();
 };
 
