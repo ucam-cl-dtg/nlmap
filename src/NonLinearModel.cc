@@ -80,7 +80,7 @@ NonLinearModel::~NonLinearModel() {
 // Start the fitting process
 // Specify:
 // max_it :  maximum number of iterations before giving up
-// min_delta  :  minimum % change in chi-sqaured to be valid
+// min_delta  :  minimum % change in chi-squared to be valid
 //----------------------------------------
 void NonLinearModel::Fit(
 			 const int max_it,
@@ -201,6 +201,14 @@ void NonLinearModel::ComputeSupportData(REAL *params) {
   for (int i=0;i<mDataSize; i++) {
     // Compute the current function value
     REAL result = mFitFunction->Evaluate(i,params,mFitData);
+    
+    // Check for nans
+    if (result!=result) throw NANException();
+    for (int n=0; n<mNumParams; n++) {
+      if (mFitFunction->GetCurrentDerivative(n) !=
+	mFitFunction->GetCurrentDerivative(n)) throw NANException();
+    }
+
     REAL dm = mFitData->GetMeasurement(i)-result;
     REAL sigma = mFitData->GetSigma(i);
     mChiSq += dm*dm/(sigma*sigma);
