@@ -177,7 +177,6 @@ int NonLinearModel::SingleMarquardtIteration() {
       mBeta[i]=mDa[i][0];
       mParams[i]=paramsdash[i];
     } 
-    cout << "New guess " << mParams[0] << " " << mParams[1] <<" " << mParams[2] << endl;
     return 1;
   }
   else {
