@@ -108,5 +108,5 @@ public:
 
 
 
-
+#endif//ANGULATION_FUNCTION_HH
 
