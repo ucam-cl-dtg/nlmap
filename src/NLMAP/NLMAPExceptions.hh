@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -24,9 +25,9 @@
 #include <exception>
 #include <cstring>
 
-//--------------------------------
-// Base exception class for NLMaP
-//--------------------------------
+///
+/// Base exception class for NLMaP
+///
 class NLMAPException : public std::exception {
 public:
   virtual char * what() { return "Exception thrown in NLMAP"; }
@@ -34,56 +35,60 @@ public:
 
 
 
-
-//--------------------------------
-// Exceptions thrown by NonLinearModel
-// and accompanying classes
-//--------------------------------
-
-// General failure to converge
+///
+/// General failure of NLM to converge
+///
 class FailedToConverge : public NLMAPException {
 public:
   char * what() { return "Nonlinear model failed to converge"; }
 };
 
-// Model failed to converge fast enough
+///
+/// Model failed to converge fast enough
+///
 class MaxIterations : public NLMAPException {
 public:
   char * what() { return "Nonlinear model took too many iterations"; }
 };
  
 
-// Encountered a singular matrix
+///
+/// Encountered a singular matrix
+///
 class SingularMatrix : public NLMAPException {
 public:
   char * what() { return "Singular matrix encountered"; }
 };
 
-// General error in the FitFunction implementation
+///
+/// General error in the FitFunction implementation
+///
 class FitFunctionException : public NLMAPException {
 public:
   char * what() { return "Exception in FitFunction implementation"; }
 };
 
+///
+/// Encountered an array out-of-bounds index
+///
 class IndexOutOfBounds : public NLMAPException {
 public:
   char * what() { return "Attempt to access non-existent data"; }
 };
 
 
-//--------------------------------
-// Exceptions thrown by IterativeModel
-// and accompanying classes
-//--------------------------------
-
-// General error in the ResidualSorter implementation
+///
+/// General error in the ResidualSorter implementation
+///
 class ResidualSorterException : public NLMAPException {
 public:
   char * what() { return "Exception when trying to evaluate residuals"; }
 };
 
 
-
+///
+/// General error in interative modeling
+///
 class ModelingError : public NLMAPException {
 public:
   ModelingError(char *f){strcpy(msg,f);}
@@ -94,11 +99,17 @@ private:
 };
 
 
+///
+/// Unable to meet accuracy
+///
 class ModelingFailure : public NLMAPException {
 public:
   char * what() { return "Unable to model data to sufficient accuracy"; }
 };
 
+///
+/// Input data was invalid
+///
 class InvalidData : public NLMAPException {
 public:
   char * what() { return "Attempt to add invalid data"; }

@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -28,6 +29,9 @@
 #include <NLMAP/MagnitudeSorter.hh>
 #include <exception>
 
+///
+/// Struct to hold result
+///
 struct XYData {
   REAL x;
   REAL y;
@@ -35,9 +39,20 @@ struct XYData {
 };
 
 
-// Wrapper class for positioning
+///
+/// Wrapper class for 2D positioning
+/// using multiangulation
+///
 class MultiAngulation {
 public:
+  ///
+  /// Constructor
+  /// @param x Array of x co-ordinates
+  /// @param y Array of y co-ordinates
+  /// @param b Array of bearing measurements
+  /// @param sigma Array of 1-sigma estimates for the b array
+  /// @param n Size of the arrays
+  ///
   MultiAngulation(REAL *x, 
 		  REAL *y, 
 		  REAL *b,
@@ -46,11 +61,23 @@ public:
   
   virtual ~MultiAngulation();
 
+  ///
+  /// Wrapper to call the iterative modeler
+  /// and extract the result
+  /// @param max_it Maximum number of iterations in each NLM
+  /// @param min_delta Minimum delta for NLM to stop
+  /// @param convergence Accuracy sought
+  /// @return The position
+  ///
   XYData GetPosition(
 		     const int  max_it,
 		     const REAL min_delta,
 		     const REAL convergence); 
 
+  ///
+  /// Access to the AngulationFunction
+  /// @return Pointer to the AngulationFunction
+  ///
   AngulationFunction * GetAngulationFunction() { return mAngFunc; }
 protected:
   IterativeModeler    mModeler;

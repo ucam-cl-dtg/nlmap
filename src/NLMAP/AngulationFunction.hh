@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or

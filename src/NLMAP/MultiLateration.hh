@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -28,7 +29,9 @@
 #include <NLMAP/LaterationSorter.hh>
 #include <exception>
 
-
+///
+/// Struct to hold position
+///
 struct XYZData {
   REAL x;
   REAL y;
@@ -40,6 +43,15 @@ struct XYZData {
 // Wrapper class for positioning
 class MultiLateration {
 public:
+  ///
+  /// Constructor
+  /// @param x Array of x co-ordinates
+  /// @param y Array of y co-ordinates
+  /// @param z Array of z co-ordinates
+  /// @param d Array of lateration measures
+  /// @param sigma Array of 1-sigma errors on d
+  /// @param n Size of input arrays
+  ///
   MultiLateration(REAL *x, 
 		  REAL *y, 
 		  REAL *z,
@@ -48,10 +60,24 @@ public:
 		  int n);
   
   virtual ~MultiLateration();
+
+  ///
+  /// Wrapper to use iterative modeler
+  /// to calculate a position
+  /// @param max_it Maximum number of iterations in each NLM
+  /// @param min_delta Minimum delta for NLM to stop
+  /// @param convergence Accuracy sought
+  /// @return The position
+  ///
   XYZData GetPosition(
 		      const int  max_it,
 		      const REAL min_delta,
 		      const REAL convergence);  
+
+  ///
+  /// Access to the LaterationFunction
+  /// @return Pointer to the LaterationFunction
+  ///
   LaterationFunction * GetLaterationFunction() { return mLatFunc; }
   
 protected:

@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -26,36 +27,74 @@
 #include <exception>
 #include <vector>
 
-/**
- * Class to handle input data
- */
+///
+/// Class to handle input data
+///
 class FitData {
  public:
+  ///
+  /// Constructor
+  /// @param numFields Number of field in datum (3 for x,y,z etc)
+  ///
   FitData(const int numFields);
   virtual ~FitData();
 
   typedef std::vector<REAL> Datum;
 
-  // Get number of valid measurments in set
+  ///
+  /// Get number of VALID measurments in set
+  ///
   virtual int   GetInputDataSize();
-  // Get measurement for index idx
+
+  ///
+  /// Get measurement for VALID index idx
+  ///
   virtual REAL  GetMeasurement(const int idx);
-  // Get the error estimate of measurement idx
+
+  ///
+  /// Get the error estimate of VALID measurement idx
+  ///
   virtual REAL  GetSigma(const int idx);
-  // Get validity of specific measurement
+
+  ///
+  /// Get validity of specific measurement
+  /// @param idx idx'th measurement
+  ///
   virtual bool  GetValidity(const int idx);
-  // Get the std error of the model parameters
+
+  ///
+  /// Invalidate a datum
+  /// @param n n'th VALID index
+  ///
   virtual void  Invalidate(const int n);
-  // Get the raw data
+
+  ///
+  /// Get data
+  /// @param field Field index into Datum
+  /// @param idx idx'th VALID index
+  /// @returns Requested value
+  ///
   virtual REAL  GetData(const int field, const int idx);
-  // Add some new data
+
+  ///
+  /// Add some new data
+  /// @param Datum A vector of data (e.g. x,y,z)
+  /// @param measurement The measured value for the datum
+  /// @param error The estimated error in measurement parameter
+  ///
   virtual void  AddDatum (Datum &data,
 			  REAL measurement,
 			  REAL error);
 
 protected:
-  // Convert an index into valid data
-  // to an index into all data (inc. invalid)
+  ///
+  /// Convert a reference to the j'th VALID
+  /// index to the actual index into the data
+  /// vectors
+  /// @param j Input index
+  /// @return Actual array index
+  ///
+  /// to an index into all data (inc. invalid)
   int  ActualIndex(int j);
 
   int                  mNumFields;
@@ -67,29 +106,70 @@ protected:
 
 
 
-/**
- * Pure virtual class overridden
- * with a custom function and parameters
- */
+///
+/// Pure virtual class overridden
+/// with a custom function for fitting
+///
 class FitFunction {
  public:
+  ///
+  /// Constructor
+  /// @param nparams Number of parameters to solve for
+  /// @param fd Pointer to the data to fit to
   FitFunction(const int nparams, FitData *fd);
   virtual ~FitFunction();
-  // Return the residual between two values
-  virtual REAL CalculateResidual(REAL val1, REAL val2);// {return val1-val2;}
-  // Return the number of parameters in the fitting function
+
+  ///
+  /// Return the residual between two values
+  /// Default is just val1-val2 but this can be
+  /// overridden in derived classes if needed
+  ///
+  virtual REAL CalculateResidual(REAL val1, REAL val2);
+
+  ///
+  /// Return the number of parameters in the fitting function
+  ///
   virtual int   GetNumParameters();
-  // Initialise the parameters
+
+  ///
+  /// Initialise the parameters
+  ///
   virtual void  InitialiseParameters()=0;
-  // Return the parameter estimates
+
+  ///
+  /// Return the parameter estimates
+  /// @return Parameter array
+  ///
   virtual REAL* GetParams();
-  // Get derivative wrt parameters for index idx
+
+  ///
+  /// Gets the derivative wrt the idx'th parameter
+  /// of the last datum to be processed by Evaluate
+  /// i.e. Call Evaluate on the datum before retrieving
+  /// the derivative with this function
+  /// @param idx Parameter index (e.g. 0,1,2 for x,y,z estimates)
+  ///
   virtual REAL  GetCurrentDerivative(const int idx);
-  // Evaluate the fitting function
+
+  ///
+  /// Evaluate the fitting function for the idx'th
+  /// valid datum, based on the parameters in array
+  /// parameters
+  /// @param idx idx'th valid datum
+  /// @param parameters Array of current parameter values
+  ///
   virtual REAL  Evaluate(const int idx, REAL parameters[])=0;
-  // Get the std error of the model parameters
+
+  ///
+  /// Get the overall standard error of the model parameters
+  /// @return 1-sigma error
+  ///
   virtual REAL  GetError();
-  // Set the std error of the model parameters;
+
+  ///
+  /// Set the std error of the model parameters;
+  /// @param s 1-sigma error estimate
+  ///
   virtual void  SetError(const REAL s);
 protected:
   int      mNumParams;
@@ -102,62 +182,46 @@ protected:
 
 
 
-
-
-
-
-
-/**
- * Pure virtual class to override with
- * your own function 
- */
-//  class FittingFunction {
-//    public:
-//    virtual int   GetInputDataSize()=0;
-//    // Get measurement for index idx
-//    virtual REAL  GetMeasurement(const int idx)=0;
-//    // Get the error estimate of measurement idx
-//    virtual REAL  GetSigma(const int idx)=0;
-//    // Get validity of specific measurement
-//    virtual bool  GetValidity(const int idx)=0;
-//    // Get the std error of the model parameters
-//    virtual REAL  GetError()=0;
-//    // Set the std error of the model parameters;
-//    virtual void  SetError(const REAL s)=0;
-//    // Return the residual between two values
-//    virtual REAL CalculateResidual(REAL val1, REAL val2)=0;
-//    // Return the number of parameters in the fitting function
-//    virtual int   GetNumParameters()=0;
-//    // Initialise the parameters
-//    virtual void  InitialiseParameters()=0;
-//    // Return the parameter estimates
-//    virtual REAL* GetParams()=0;
-//    // Get derivative wrt parameters for index idx
-//    virtual REAL  GetCurrentDerivative(const int idx)=0;
-//    // Evaluate the fitting function
-//    virtual REAL  Evaluate(const int x, REAL parameters[])=0;
-//    // Invalidate a datum
-//    virtual void  Invalidate(int n)=0;
-//  };
-
-
+///
+/// Form a non-linear model (NLM)
+///
 class NonLinearModel {
 public:
+  ///
+  /// Constructor
+  /// @param ff FitFunction to use
+  /// @param fd Fit Data to use
+  ////
   NonLinearModel(FitFunction *ff, FitData *fd);
   virtual ~NonLinearModel();
 
+  ///
+  /// Get the model error estimate
+  /// @return Error value
+  ///
   REAL GetStdErr();
 
-
+  ///
+  /// Perform the fit
+  /// @param max_it Maximum number of iterations for model
+  /// @param min_delta Minimum delta value to achieve
+  ///
   void Fit(int max_it,
 	   REAL min_delta);
 
 protected:
 
-  // Perform a single iteration
+  ///
+  /// Perform a single iteration of
+  /// of the Levenberg-Marquardt method
+  ///
   int SingleMarquardtIteration();
 
-  // Find alpha, beta, chisq
+  ///
+  /// Compute alpha, beta, chisq
+  /// for a specific set of parameter values
+  /// @param params Array of parameter values
+  ///
   void ComputeSupportData(REAL *params);
 
   FitFunction    *mFitFunction;

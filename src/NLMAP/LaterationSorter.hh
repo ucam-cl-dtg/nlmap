@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -25,11 +26,23 @@
 #include <NLMAP/IterativeModeler.hh>
 #include <NLMAP/LaterationFunction.hh>
 
+///
+/// Specific multilateration-reducing
+/// residual sorter for multilateration
+///
 class LaterationSorter : public ResidualSorter {
 public:
+  ///
+  /// Constructor
+  /// @param ff Pointer to the lateration function
+  /// @param fd Pointer to the fit data
+  ///
   LaterationSorter(LaterationFunction *ff, FitData *fd) : ResidualSorter(ff,fd) {}
   virtual ~LaterationSorter() {}
 
+  ///
+  /// Return maximum reesidual index
+  ///
   virtual int GetMaxResidualIndex();
 };
 

@@ -1,4 +1,5 @@
 /*
+  $Header$
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -24,8 +25,10 @@
 
 #include <NLMAP/IterativeModeler.hh>
 
-// This residual sorter class
-// sorts residuals by magnitude
+///
+/// This residual sorter class
+/// sorts residuals by magnitude
+///
 class MagnitudeSorter : public ResidualSorter {
 public:
   MagnitudeSorter(FitFunction *ff, FitData *fd) : ResidualSorter(ff,fd) {}
