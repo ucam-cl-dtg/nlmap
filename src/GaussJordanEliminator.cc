@@ -60,7 +60,6 @@ int GaussJordanEliminator::Eliminate(REAL **a, int na,
    
     for (int i=c; i<na; i++) {
       if (fabs(a[i][c])> biggest) {
-	std::cout << "*** " << fabs(a[i][c]) << std::endl;
 	biggest = a[i][c];
 	pivot=i;
       }
