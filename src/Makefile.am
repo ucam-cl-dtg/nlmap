@@ -17,7 +17,8 @@ libNLMAP_la_SOURCES = 	AngulationFunction.cc \
 			TriAve.cc \
 			MinTriLat.cc \
 			MaxTriLat.cc \
-			LinearisedLS.cc
+			LinearisedLS.cc \
+			RobustLS.cc
 
 
 
@@ -36,11 +37,12 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 				NLMAP/TriAve.hh \
 				NLMAP/MinTriLat.hh \
 				NLMAP/MaxTriLat.hh \
-				NLMAP/LinearisedLS.hh
+				NLMAP/LinearisedLS.hh \
+				NLMAP/RobustLS.hh
 
 libNLMAP_la_LDFLAGS = -version-info 0:0:0
 
-bin_PROGRAMS = example ransac_test triave_test ls_test
+bin_PROGRAMS = example ransac_test triave_test ls_test robust_test
 
 example_SOURCES = main.cc
 example_LDADD = libNLMAP.la
@@ -53,5 +55,8 @@ triave_test_LDADD = libNLMAP.la
 
 ls_test_SOURCES = ls_test.cc
 ls_test_LDADD = libNLMAP.la
+
+robust_test_SOURCES = robust_test.cc
+robust_test_LDADD = libNLMAP.la
 
 noinst_PROGRAMS = example ransac_test triave_test ls_test

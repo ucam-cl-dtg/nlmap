@@ -9,7 +9,7 @@ LinearisedLS::LinearisedLS(
 			   const REAL* z,
 			   const REAL* d,
 			   const REAL* sigma,
-			   const int n) : mA(0), mB(0) {
+			   const int n) : mA(0), mB(0), mH(0) {
 
   // calculate the A matrix - 3 columns, nC2 rows
   mDim = (int)(n*(n-1)/2.0);
@@ -53,6 +53,11 @@ LinearisedLS::~LinearisedLS() {
     delete[] mB;
   }
 
+  if (mH) {
+    delete[] mH;
+  }
+  
+
 }
 
 
@@ -94,22 +99,38 @@ XYZData LinearisedLS::GetPosition() {
   
 
 
-  // Multiply out  P=(InvATA)ATB
-  REAL ap[3],p[3];
-
-  for (int r=0; r<3; r++) {
-    ap[r]=0.0;
-    for (int i=0; i<mDim; i++) {
-      ap[r]+=mB[i]*AT[r][i];
-    }
-  }
-
-  for (int i=0; i<3; i++) {
-    p[i]=0;
+  // Get (InvATA)AT
+  REAL mult[3][mDim];
+  for (int i=0; i<mDim; i++) {
+    mult[0][i]=0.0;
+    mult[1][i]=0.0;
+    mult[2][i]=0.0;
     for (int j=0; j<3; j++) {
-      p[i]+=InvATA[i][j]*ap[j];
+      mult[0][i] += InvATA[0][j]*AT[j][i];
+      mult[1][i] += InvATA[1][j]*AT[j][i];
+      mult[2][i] += InvATA[2][j]*AT[j][i];
     }
   }
+  
+
+  // Calculate the point
+  REAL p[3];
+  for (int j=0; j<3; j++) {
+    p[j]=0.0;
+    for (int i=0; i<mDim; i++) 
+      p[j]+= mult[j][i] * mB[i];
+  }
+
+  // Store the hat matrix mH = mA*mult diagonals
+  mH = new REAL[mDim];
+  for (int k=0; k<mDim; k++) {
+    mH[k]=0.0;
+    for (int q=0;q<3; q++) {
+      mH[k] += mult[q][k] * mA[k][q];
+    }
+  }
+
+
 
   for (int i=0; i<3; i++) {
     delete[] InvATA[i];

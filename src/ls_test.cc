@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
   REAL d[5] = {1.7, 1.73, 1.71, 2.1, 21.3};
   REAL s[5] = {1.0, 1.0, 1.0, 1.0, 10.0};
 
-  LinearisedLS ls(x,y,z,d,s,5);
+  LinearisedLS ls(x,y,z,d,s,4);
 
   XYZData pd = ls.GetPosition();
   

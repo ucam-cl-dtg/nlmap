@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include <NLMAP/Parameters.hh>
 #include <NLMAP/MultiLateration.hh>
 
@@ -25,9 +25,15 @@ public:
   ///
   XYZData GetPosition();
 
+  ///
+  /// Get the hat matrix diagonals
+  ///
+  REAL * GetHatMatrixDiagonals() { return mH;}
+
 private:
   REAL **mA;
   REAL  *mB;
+  REAL  *mH;
   int mDim;
 
 };
