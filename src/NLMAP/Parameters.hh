@@ -22,6 +22,17 @@
 #ifndef PARAMETERS_HH
 #define PARAMETERS_HH
 
+// Do you want debug info?
+#define DEBUG_FLAG
+
+#ifdef DEBUG_FLAG
+# include <iostream>
+# define DEBUG(x) std::cout << __FILE__ << ":" << __LINE__ << " " << x << std::endl
+#else
+# define DEBUG(x)
+#endif
+
+
 // What precision do you want?
 #define REAL float
 
