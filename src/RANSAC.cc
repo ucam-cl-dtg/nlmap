@@ -73,6 +73,47 @@ XYZData RANSAC::GetPosition(const int max_it,
 
     DEBUG("Points selection: [" << points[0] << "," << points[1] << "," << points[2] << "]");
 
+    // calculate the normal vector to the plane by working out two
+    // vectors that lie on the plane and taking their cross product
+
+    REAL v1x = m_x[points[0]] - m_x[points[1]];
+    REAL v1y = m_y[points[0]] - m_y[points[1]];
+    REAL v1z = m_z[points[0]] - m_z[points[1]];
+
+    DEBUG("v1 = (" << v1x << "," << v1y << "," << v1z << ")");
+
+    REAL v2x = m_x[points[0]] - m_x[points[2]];
+    REAL v2y = m_y[points[0]] - m_y[points[2]];
+    REAL v2z = m_z[points[0]] - m_z[points[2]];
+
+    DEBUG("v2 = (" << v2x << "," << v2y << "," << v2z << ")");
+
+    REAL nx = v1y*v2z - v2y*v1z;
+    REAL ny = v2x*v1z - v1x*v2z;
+    REAL nz = v1x*v2y - v1y*v2x;
+
+    DEBUG("n = (" << nx << "," << ny << "," << nz << ")" );
+
+    // compute the magnitude of the cross product - if this is close
+    // to zero then our vectors are close to collinear and so we
+    // should not consider them
+    
+    REAL mag = nx*nx+ny*ny+nz*nz;
+
+    if (mag < 0.0001) {
+      DEBUG("Magnitude of cross product is too small - the selected vectors are collinear - bailing out.");
+      continue;
+    }
+
+    REAL len = sqrt(mag);
+    
+    nx/=len;
+    ny/=len;
+    nz/=len;
+
+    DEBUG("Normal vector to plane is " << nx << "," << ny << "," << nz);
+
+
     // load them into the Nonlinear lateration fit function
     LaterationData latdata;
     for(int i=0;i<3;++i) {
@@ -95,33 +136,7 @@ XYZData RANSAC::GetPosition(const int max_it,
     // this is only one of two possible positions the other one lies
     // on the other sied of the plane described by these three points.
 
-    // calculate the normal vector to the plane by working out two
-    // vectors that lie on the plane and taking their cross product
-
-    REAL v1x = m_x[points[0]] - m_x[points[1]];
-    REAL v1y = m_y[points[0]] - m_y[points[1]];
-    REAL v1z = m_z[points[0]] - m_z[points[1]];
-
-    DEBUG("v1 = (" << v1x << "," << v1y << "," << v1z << ")");
-
-    REAL v2x = m_x[points[0]] - m_x[points[2]];
-    REAL v2y = m_y[points[0]] - m_y[points[2]];
-    REAL v2z = m_z[points[0]] - m_z[points[2]];
-
-    DEBUG("v2 = (" << v2x << "," << v2y << "," << v2z << ")");
-
-    REAL nx = v1y*v2z - v2y*v1z;
-    REAL ny = v2x*v1z - v1x*v2z;
-    REAL nz = v1x*v2y - v1y*v2x;
-
-    REAL len = sqrt( nx*nx + ny*ny + nz*nz);
     
-    nx/=len;
-    ny/=len;
-    nz/=len;
-
-    DEBUG("Normal vector to plane is " << nx << "," << ny << "," << nz);
-
     // project the vector from the located point to the plane onto the
     // normal vector
     REAL dotprod = nx*(nlm_x - m_x[points[0]]) +  ny*(nlm_y - m_y[points[0]]) +  nz*(nlm_z - m_z[points[0]]);
