@@ -34,7 +34,7 @@ nobase_include_HEADERS = 	NLMAP/AngulationFunction.hh \
 
 libNLMAP_la_LDFLAGS = -version-info 0:0:0
 
-bin_PROGRAMS = example ransac_test
+bin_PROGRAMS = example ransac_test triave_test
 
 example_SOURCES = main.cc
 example_LDADD = libNLMAP.la
@@ -42,4 +42,7 @@ example_LDADD = libNLMAP.la
 ransac_test_SOURCES = ransac_test.cc
 ransac_test_LDADD = libNLMAP.la
 
-noinst_PROGRAMS = example ransac_test
+triave_test_SOURCES = triave_test.cc
+triave_test_LDADD = libNLMAP.la
+
+noinst_PROGRAMS = example ransac_test triave_test

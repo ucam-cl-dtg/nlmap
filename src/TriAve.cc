@@ -150,6 +150,50 @@ void TriAve::Process(int first,
 		     int& count,
 		     const int max_it,
 		     const REAL convergence) {
+
+  DEBUG("Processing " << first << "," << second << "," << third);
+
+  // calculate the normal vector to the plane by working out two
+  // vectors that lie on the plane and taking their cross product
+
+  REAL v1x = m_x[first] - m_x[second];
+  REAL v1y = m_y[first] - m_y[second];
+  REAL v1z = m_z[first] - m_z[second];
+  
+  DEBUG("v1 = (" << v1x << "," << v1y << "," << v1z << ")");
+  
+  REAL v2x = m_x[first] - m_x[third];
+  REAL v2y = m_y[first] - m_y[third];
+  REAL v2z = m_z[first] - m_z[third];
+  
+  DEBUG("v2 = (" << v2x << "," << v2y << "," << v2z << ")");
+  
+  REAL nx = v1y*v2z - v2y*v1z;
+  REAL ny = v2x*v1z - v1x*v2z;
+  REAL nz = v1x*v2y - v1y*v2x;
+  
+  DEBUG("n = (" << nx << "," << ny << "," << nz << ")" );
+  
+  // compute the magnitude of the cross product - if this is close
+  // to zero then our vectors are close to collinear and so we
+  // should not consider them
+  
+  REAL mag = nx*nx+ny*ny+nz*nz;
+  
+  if (mag < 0.0001) {
+    DEBUG("Magnitude of cross product is too small - the selected vectors are collinear - bailing out.");
+    return;
+  }
+  
+  REAL len = sqrt(mag);
+  
+  nx/=len;
+  ny/=len;
+  nz/=len;
+  
+  DEBUG("Normal vector to plane is " << nx << "," << ny << "," << nz);
+  
+  
   // load the chosen points into the NonLinear lateration function  
   LaterationData latdata;
 
@@ -160,16 +204,16 @@ void TriAve::Process(int first,
   latdata.AddDatum(d1,m_d[first],m_sigma[first]);
 
   LaterationData::Datum d2;
-  d2.push_back(m_x[first]);
-  d2.push_back(m_y[first]);
-  d2.push_back(m_z[first]);
-  latdata.AddDatum(d2,m_d[first],m_sigma[first]);
+  d2.push_back(m_x[second]);
+  d2.push_back(m_y[second]);
+  d2.push_back(m_z[second]);
+  latdata.AddDatum(d2,m_d[second],m_sigma[second]);
 
   LaterationData::Datum d3;
-  d3.push_back(m_x[first]);
-  d3.push_back(m_y[first]);
-  d3.push_back(m_z[first]);
-  latdata.AddDatum(d3,m_d[first],m_sigma[first]);
+  d3.push_back(m_x[third]);
+  d3.push_back(m_y[third]);
+  d3.push_back(m_z[third]);
+  latdata.AddDatum(d3,m_d[third],m_sigma[third]);
 
   LaterationFunction ff;
   ff.InitialiseParameters(&latdata);
@@ -178,32 +222,6 @@ void TriAve::Process(int first,
   REAL nlm_x = ff.GetParams()[0];
   REAL nlm_y = ff.GetParams()[1];
   REAL nlm_z = ff.GetParams()[2];
-  
-  // this is only one of two possible positions the other one lies
-  // on the other side of the plane described by these three points.
-  
-  // calculate the normal vector to the plane by working out two
-  // vectors that lie on the plane and taking their cross product
-  
-  REAL v1x = m_x[first] - m_x[second];
-  REAL v1y = m_y[first] - m_y[second];
-  REAL v1z = m_z[first] - m_z[second];
-  
-  REAL v2x = m_x[first] - m_x[third];
-  REAL v2y = m_y[first] - m_y[third];
-  REAL v2z = m_z[first] - m_z[third];
-  
-  REAL nx = v1y*v2z - v2y*v1z;
-  REAL ny = v2x*v1z - v1x*v2z;
-  REAL nz = v1x*v2y - v1y*v2x;
-  
-  REAL len = sqrt( nx*nx + ny*ny + nz*nz);
-  
-  nx/=len;
-  ny/=len;
-  nz/=len;
-  
-  DEBUG("Normal vector to plane is " << nx << "," << ny << "," << nz);
   
   // project the vector from the located point to the plane onto the
   // normal vector

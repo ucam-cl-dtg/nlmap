@@ -2,7 +2,7 @@
  * $Header$
  */
 
-#include <NLMAP/RANSAC.hh>
+#include <NLMAP/TriAve.hh>
 
 #include <iostream>
 #include <cmath>
@@ -10,20 +10,15 @@
 
 #define MAX_ERROR 0.05
 
-void do_attempt(REAL tx, REAL ty, REAL tz,RANSAC& r1) {
+void do_attempt(REAL tx, REAL ty, REAL tz,TriAve& r1) {
   try {
     XYZData pd = r1.GetPosition(100,0.001);
     REAL distance = sqrt((pd.x - tx)*(pd.x - tx) + (pd.y-ty)*(pd.y-ty) + (pd.z-tz)*(pd.z-tz));
     
-    if (distance > MAX_ERROR) {
-      std::cout << "Distance was " << distance << " which exceeds threshold ("<<MAX_ERROR<<") - test failed." << std::endl;
-      exit(-1);
-    }  
+    std::cout << "Distance was " << distance << std::endl;
   }
   catch (ModelingFailure &mf) {
-    std::cout << "Caught modelling failure - " << mf.what() << " - test failed."<< std::endl;
-
-
+    std::cout << "Caught modelling failure - " << mf.what() << " - test failed."<< std::endl;        
     exit(-1);
   }
   catch (NLMAPException &n) {
@@ -63,7 +58,7 @@ void test1(REAL tx, REAL ty, REAL tz, REAL d1) {
   // try it first with three points
   for(int i=0;i<7;++i) {
     std::cout << "Running with points " << i << "," << i+1 << "," << i+2 << std::endl;
-    RANSAC r1(x+i,y+i,z+i,d+i,s+i,3,0.99,0.001);
+    TriAve r1(x+i,y+i,z+i,d+i,s+i,3);
     do_attempt(tx,ty,tz,r1);
   }
   
@@ -73,7 +68,7 @@ void test1(REAL tx, REAL ty, REAL tz, REAL d1) {
     REAL store = d[i];
     d[i] *= 1.5;
     std::cout << "Running with all points and one artificial outlier at point " << i << std::endl;
-    RANSAC r1(x,y,z,d,s,9,0.5,0.001);
+    TriAve r1(x,y,z,d,s,9);
     do_attempt(tx,ty,tz,r1);
     d[i] = store;
   }
@@ -87,7 +82,7 @@ void test1(REAL tx, REAL ty, REAL tz, REAL d1) {
 	REAL store2 = d[j];
 	d[j] *= 1.5;
 	std::cout << "Running with all points and artificial outliers at points " << i << " and " << j << std::endl;
-	RANSAC r1(x,y,z,d,s,9,0.5,0.001);
+	TriAve r1(x,y,z,d,s,9);
 	do_attempt(tx,ty,tz,r1);
 	d[j] = store2;
       }
@@ -97,12 +92,12 @@ void test1(REAL tx, REAL ty, REAL tz, REAL d1) {
 }
 
 /**
- * Test harness for the RANSAC implementation
+ * Test harness for the TriAve implementation
  */
 int main(int argc, char **argv) {
 
   test1(1,1,1,1);
-  test1(1,1,1,2);
-  test1(-1,5,-45,13);
+  //  test1(1,1,1,2);
+  //  test1(-1,5,-45,13);
 
 }

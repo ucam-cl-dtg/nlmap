@@ -73,6 +73,9 @@ XYZData RANSAC::GetPosition(const int max_it,
 			    const REAL convergence)
 {
   
+  XYZData bestEstimate;
+  int bestQuorumSize = -1;
+
   for(int iterations=0;iterations<m_iteration_count;++iterations) {
 
     // select 3 data points at random making sure we have no
@@ -214,10 +217,22 @@ XYZData RANSAC::GetPosition(const int max_it,
       return pd;
     }
 
+    if (t > bestQuorumSize) {
+      bestEstimate.x = nlm_x;
+      bestEstimate.y = nlm_y;
+      bestEstimate.z = nlm_z;
+      bestEstimate.sigma = sqrt((sum*sum - sumsq)/t);
+      bestQuorumSize = t;
+    }
+
     // if this is less than 8 points then repeat
     
   }
   
+  if (bestQuorumSize > 5) {
+    return bestEstimate;
+  }
+
   // if we get here we don't deem it likely that we will get a good
   // answer - so give up.
   throw ModelingFailure();
