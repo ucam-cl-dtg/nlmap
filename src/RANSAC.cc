@@ -148,10 +148,19 @@ XYZData RANSAC::GetPosition(const int max_it,
       latdata.AddDatum(d,m_d[index],m_sigma[index]);
     }
     LaterationFunction ff;
-    ff.InitialiseParameters(&latdata);
-    NonLinearModel nlm(&ff,&latdata);
-    nlm.Fit(max_it, convergence); 
-         
+    try {
+      ff.InitialiseParameters(&latdata);
+      NonLinearModel nlm(&ff,&latdata);
+      nlm.Fit(max_it, convergence); 
+    }
+    catch (ModelingFailure& e) {
+      DEBUG("Caught ModelingFailure - skipping this one");
+      continue;
+    }
+    catch (MaxIterations& e) {
+      DEBUG("Caught MaxIterations - skipping this one");
+      continue;
+    }
     REAL nlm_x = ff.GetParams()[0];
     REAL nlm_y = ff.GetParams()[1];
     REAL nlm_z = ff.GetParams()[2];

@@ -216,9 +216,17 @@ void TriAve::Process(int first,
   latdata.AddDatum(d3,m_d[third],m_sigma[third]);
 
   LaterationFunction ff;
-  ff.InitialiseParameters(&latdata);
-  NonLinearModel nlm(&ff,&latdata);
-  nlm.Fit(max_it, convergence); 
+  try {
+    ff.InitialiseParameters(&latdata);
+    NonLinearModel nlm(&ff,&latdata);
+    nlm.Fit(max_it, convergence); 
+  }
+  catch (ModelingFailure& e) {
+    return;
+  }
+  catch (MaxIterations& e) {
+    return;
+  }
   REAL nlm_x = ff.GetParams()[0];
   REAL nlm_y = ff.GetParams()[1];
   REAL nlm_z = ff.GetParams()[2];
