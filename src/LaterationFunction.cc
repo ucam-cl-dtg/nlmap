@@ -31,13 +31,6 @@ LaterationFunction::~LaterationFunction() {}
 
 
 //----------------------------------------
-// Return the number of parameters in the fitting function
-//----------------------------------------
-int LaterationFunction::GetNumParameters() {return 3;}
-
-
-
-//----------------------------------------
 // Initialise the parameters ready for 
 // regression
 //----------------------------------------

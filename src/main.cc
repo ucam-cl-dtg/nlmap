@@ -23,8 +23,6 @@
 #include <NLMAP/MultiLateration.hh>
 #include <NLMAP/MultiAngulation.hh>
 
-#include <NLMAP/Positioner.hh>
-
 #include <iostream>
 #include <cmath>
 
