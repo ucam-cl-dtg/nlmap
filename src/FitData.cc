@@ -32,6 +32,7 @@ FitData::~FitData() {}
 int FitData::GetInputDataSize() {
   int n=0;
   for (int i=0; i<mMeasurements.size(); i++) {
+
     if (mValidity[i]) n++;
   }
   return n;

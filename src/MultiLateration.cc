@@ -66,7 +66,6 @@ XYZData MultiLateration::GetPosition(const int  max_it,
 		 max_it,
 		 min_delta,
 		 convergence);
-
   XYZData pd;
   pd.x = mLatFunc->GetParams()[0];
   pd.y = mLatFunc->GetParams()[1];

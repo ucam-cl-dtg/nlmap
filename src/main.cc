@@ -32,38 +32,6 @@
 //----------------------------------
 int main(int argc, char **argv) {
 
-  LaterationData data;
-  FitData::Datum datum;
-  datum.push_back(0.0);
-  datum.push_back(0.0);
-  datum.push_back(2.0);
-  data.AddDatum(datum,1.8499,0.1);
-
-  datum.clear();
-  datum.push_back(1.0);
-  datum.push_back(0.0);
-  datum.push_back(2.0);
-  data.AddDatum(datum,1.38434,0.1);
-
-  datum.clear();
-  datum.push_back(2.0);
-  datum.push_back(0.0);
-  datum.push_back(2.0);
-  data.AddDatum(datum,1.83012,0.1);
-
-
-  LaterationFunction lf;
-  lf.InitialiseParameters(&data);
-  NonLinearModel nlm(&lf,&data);
-  try{
-    nlm.Fit(100, 0.001); 
-    std::cout << "Position: " << lf.GetParams()[0] << " " << lf.GetParams()[1] << " " << lf.GetParams()[2] << std::endl;
-  }
-  catch (NLMAPException &n) {
-    std::cout << n.what() << std::endl;
-  }
-  return 0;
-
 
   //----------------------------------
   // MULTILATERATION

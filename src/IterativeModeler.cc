@@ -50,26 +50,31 @@ void IterativeModeler::Model(FitFunction *ff,
     ff->InitialiseParameters(fd);
     NonLinearModel nlm(ff,fd);
     try {
+
       nlm.Fit(max_it, min_delta); 
+
     }
     catch (NLMAPException &nlme) {
       throw ModelingError("NLM exception");
     }
+
     ff->SetError(nlm.GetStdErr());
+
     // Is the result accurate enough?
     if (nlm.GetStdErr() < convergence) {
       success=true;
       break;
     }
     else {
+
       // Need to discard data and try again
       try {
 	int n = rs->GetMaxResidualIndex();
 	fd->Invalidate(n);
+
       }
       catch(...) { throw ModelingError("Failed to ID max residual"); }
     }
   }
-
   if (!success) throw ModelingFailure();
 }
