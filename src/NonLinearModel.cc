@@ -86,7 +86,7 @@ NonLinearModel::~NonLinearModel() {
 void NonLinearModel::Fit(
 			 const int max_it,
 		 	 const REAL min_delta) {
-  int niter=0;
+  mIter=0;
   // Want to iterate:
   // + while lambda is increasing
   // + until chi squared decreases negligibly
@@ -94,7 +94,7 @@ void NonLinearModel::Fit(
   REAL delta=1;
   REAL lastLambda=-1.0;
   REAL lastChiSq=-1.0;
-  while (niter<max_it && ((delta>min_delta) || mLambda>lastLambda)) {
+  while (mIter<max_it && ((delta>min_delta) || mLambda>lastLambda)) {
     lastLambda=mLambda;
     lastChiSq=mChiSq;
     SingleMarquardtIteration();
@@ -105,12 +105,12 @@ void NonLinearModel::Fit(
     if ((mChiSq==lastChiSq) && (mLambda<=lastLambda)) break;
 
     delta = (lastChiSq==-1.0) ? 1 : fabs((mChiSq-lastChiSq)/lastChiSq);
-    niter++;
+    mIter++;
   }
-  if (niter==max_it) throw MaxIterations();
+  if (mIter==max_it) throw MaxIterations();
   mLastCall=true;
   SingleMarquardtIteration();
-  mIter = niter;
+
 }
 
 

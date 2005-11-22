@@ -1,5 +1,5 @@
 /*
-  $Header$
+  $Header: /home/rkh23/src/cvsroot/NLMaP/src/NLMAP/NonLinearModel.hh,v 1.5 2005/11/22 10:01:44 rkh23 Exp $
   Copyright (C) 2004 Robert K. Harle
 
   This program is free software; you can redistribute it and/or
@@ -205,6 +205,12 @@ public:
   REAL GetStdErr();
 
   ///
+  /// Get the number of iterations completed
+  /// @return Number of iterations
+  ///
+  int GetNumIter() { return mIter;}
+
+  ///
   /// Perform the fit
   /// @param max_it Maximum number of iterations for model
   /// @param min_delta Minimum delta value to achieve
@@ -240,6 +246,7 @@ protected:
   REAL          **mDa;
   REAL          **mSingleDa;
   bool            mLastCall;
+  int             mIter;
 };
 
 #endif

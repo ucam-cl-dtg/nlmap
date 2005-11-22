@@ -43,8 +43,8 @@ int LaterationSorter::GetMaxResidualIndex() {
 		   (mFunc->GetParams()[2]-mLatData->GetZ(i))*(mFunc->GetParams()[2]-mLatData->GetZ(i)) );
       res[i]=mLatData->GetMeasurement(i)-d;
       res_der[i][0] = (mFunc->GetParams()[0]-mLatData->GetX(i))/d;
-      res_der[i][1] = (mFunc->GetParams()[0]-mLatData->GetY(i))/d;
-      res_der[i][2] = (mFunc->GetParams()[0]-mLatData->GetZ(i))/d;
+      res_der[i][1] = (mFunc->GetParams()[1]-mLatData->GetY(i))/d;
+      res_der[i][2] = (mFunc->GetParams()[2]-mLatData->GetZ(i))/d;
   }
 
   // Multiply this by its transpose to make a 3x3 matrix
@@ -82,17 +82,19 @@ int LaterationSorter::GetMaxResidualIndex() {
     }
   }
 
-  for (int c=0; c<3; c++) {
-    mat[c][0]=res_der[c][0]*mat_inv[0][0] + res_der[c][1]*mat_inv[1][0] + res_der[c][2]*mat_inv[2][0];
-    mat[c][1]=res_der[c][0]*mat_inv[0][1] + res_der[c][1]*mat_inv[1][1] + res_der[c][2]*mat_inv[2][1];
-    mat[c][2]=res_der[c][0]*mat_inv[0][2] + res_der[c][1]*mat_inv[1][2] + res_der[c][2]*mat_inv[2][2];
+
+  REAL h1[n][3];
+  for (int c=0; c<n; c++) {
+    h1[c][0]=res_der[c][0]*mat_inv[0][0] + res_der[c][1]*mat_inv[1][0] + res_der[c][2]*mat_inv[2][0];
+    h1[c][1]=res_der[c][0]*mat_inv[0][1] + res_der[c][1]*mat_inv[1][1] + res_der[c][2]*mat_inv[2][1];
+    h1[c][2]=res_der[c][0]*mat_inv[0][2] + res_der[c][1]*mat_inv[1][2] + res_der[c][2]*mat_inv[2][2];
   }
 
   REAL hat_diag[n];
   for (int c=0; c<n; c++) {
-    hat_diag[c]= mat[c][0]*res_der[c][0] +
-      mat[c][1]*res_der[c][1] +
-      mat[c][2]*res_der[c][2];
+    hat_diag[c]= h1[c][0]*res_der[c][0] +
+      h1[c][1]*res_der[c][1] +
+      h1[c][2]*res_der[c][2];
   }
 
   REAL maxr=0.0;
