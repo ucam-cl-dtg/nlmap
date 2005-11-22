@@ -79,6 +79,12 @@ public:
   /// @return Pointer to the LaterationFunction
   ///
   LaterationFunction * GetLaterationFunction() { return mLatFunc; }
+ 
+   ///
+   /// Access to the LaterationData
+   /// @return Pointer to the LaterationData
+   ///
+   LaterationData* GetLaterationData() { return &mLatData; }
   
 protected:
   IterativeModeler    mModeler;
