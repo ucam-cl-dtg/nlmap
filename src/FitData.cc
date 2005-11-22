@@ -19,6 +19,8 @@
   Email: rkh23@cantab.net
 */
 
+#include <iostream>
+
 #include <NLMAP/NonLinearModel.hh>
 #include <NLMAP/NLMAPExceptions.hh>
 
@@ -37,7 +39,6 @@ int FitData::GetInputDataSize() {
   }
   return n;
 }
-
 
 //----------------------------------------
 // Convert an index into valid data
@@ -70,7 +71,7 @@ REAL  FitData::GetSigma(const int idx) {
 // Get validity of index idx
 //----------------------------------------
 bool   FitData::GetValidity(const int idx) {
-  return mValidity[ActualIndex(idx)];
+  return mValidity[idx];
 }
 
 
