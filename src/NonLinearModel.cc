@@ -68,10 +68,10 @@ NonLinearModel::~NonLinearModel() {
     delete[] mAlphadash[i];
     delete[] mDa[i];
   }
-  delete mAlpha;
-  delete mAlphadash;
-  delete mDa;
-  delete mBeta;
+  delete[] mAlpha;
+  delete[] mAlphadash;
+  delete[] mDa;
+  delete[] mBeta;
 }
 
 
