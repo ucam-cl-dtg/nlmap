@@ -32,6 +32,11 @@ MultiLateration::MultiLateration(REAL *x,
 				 REAL *d,
 				 REAL *sigma,
 				 int n) : mLatSort(0){
+
+  if (n < 3) {
+    throw InvalidData();
+  }
+
   for (int i=0; i<n; i++) {
     FitData::Datum datum;
     datum.push_back(x[i]);
