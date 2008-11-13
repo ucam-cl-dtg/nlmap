@@ -30,7 +30,7 @@
 ///
 class NLMAPException : public std::exception {
 public:
-  virtual char * what() { return "Exception thrown in NLMAP"; }
+  virtual const char * what() { return "Exception thrown in NLMAP"; }
 };
 
 
@@ -40,7 +40,7 @@ public:
 ///
 class FailedToConverge : public NLMAPException {
 public:
-  char * what() { return "Nonlinear model failed to converge"; }
+  const char * what() { return "Nonlinear model failed to converge"; }
 };
 
 ///
@@ -48,7 +48,7 @@ public:
 ///
 class MaxIterations : public NLMAPException {
 public:
-  char * what() { return "Nonlinear model took too many iterations"; }
+  const char * what() { return "Nonlinear model took too many iterations"; }
 };
  
 
@@ -57,7 +57,7 @@ public:
 ///
 class SingularMatrix : public NLMAPException {
 public:
-  char * what() { return "Singular matrix encountered"; }
+  const char * what() { return "Singular matrix encountered"; }
 };
 
 ///
@@ -65,7 +65,7 @@ public:
 ///
 class FitFunctionException : public NLMAPException {
 public:
-  char * what() { return "Exception in FitFunction implementation"; }
+  const  char * what() { return "Exception in FitFunction implementation"; }
 };
 
 ///
@@ -73,7 +73,7 @@ public:
 ///
 class NANException : public NLMAPException {
 public:
-  char * what() { return "Evaluate() call resulted in NAN in derivates or values"; }
+  const char * what() { return "Evaluate() call resulted in NAN in derivates or values"; }
 };
 
 
@@ -82,7 +82,7 @@ public:
 ///
 class IndexOutOfBounds : public NLMAPException {
 public:
-  char * what() { return "Attempt to access non-existent data"; }
+  const char * what() { return "Attempt to access non-existent data"; }
 };
 
 
@@ -91,7 +91,7 @@ public:
 ///
 class ResidualSorterException : public NLMAPException {
 public:
-  char * what() { return "Exception when trying to evaluate residuals"; }
+  const char * what() { return "Exception when trying to evaluate residuals"; }
 };
 
 
@@ -100,9 +100,9 @@ public:
 ///
 class ModelingError : public NLMAPException {
 public:
-  ModelingError(char *f){strcpy(msg,f);}
+  ModelingError(const char *f){strcpy(msg,f);}
   ModelingError() {strcpy(msg,"Error in iterative modeling algorithm");}
-  char * what() { return msg;}
+  const char * what() { return msg;}
 private: 
   char  msg[512];
 };
@@ -113,7 +113,7 @@ private:
 ///
 class ModelingFailure : public NLMAPException {
 public:
-  char * what() { return "Unable to model data to sufficient accuracy"; }
+  const char * what() { return "Unable to model data to sufficient accuracy"; }
 };
 
 ///
@@ -121,7 +121,7 @@ public:
 ///
 class InvalidData : public NLMAPException {
 public:
-  char * what() { return "Attempt to add invalid data"; }
+  const  char * what() { return "Attempt to add invalid data"; }
 };
 
 
