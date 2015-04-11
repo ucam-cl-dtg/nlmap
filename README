@@ -1,6 +1,14 @@
 Non-Linear Modelling And Positioning (NLMAP) Library
 ====================================================
 
+This is the source code for the software used in our paper:
+
+Andrew Rice and Robert Harle. Evaluating Lateration-Based Positioning Algorithms for Fine-Grained Tracking. Joint Workshop on Foundations of Mobile Computing (DIAL-M-POMC), pages 54–61, 2005
+
+Abstract: Accurate, dependable location information enables new services to users and efficient message routing within a sensor network. Fine-grained location data are often degraded by prevalent multipath and varying transmission channel characteristics. Successful positioning systems have used over-constrained sensor data to increase resilience to these problems and improve the accuracy of the location information produced. In this paper we evaluate a selection of commonly used algorithms for range-based (lateration) measurement data. We consider their accuracy, dependability, and computational requirements. The evaluation is performed using data collected over an extended period using an established indoor positioning system that locates active tags using the propagation of ultrasound from tag to a matrix of static sensors distributed throughout a 550m2 office floor space. We identify algorithms with successful multipath rejection and highlight the importance of the sensors' geometric configuration. This is particularly pertinent when considering positioning near cell boundaries in the sensor network. We introduce two new metrics to characterise the dependability of positioning algorithms.
+
+http://www.cl.cam.ac.uk/~acr31/pubs/rice-positioning.pdf
+
 
 What is NLMAP?
 --------------
